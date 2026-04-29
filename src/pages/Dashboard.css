@@ -1,25 +1,30 @@
 .dashboard {
-  max-width: 1400px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .page-title {
-  margin: 0 0 24px;
+  margin: 0 0 16px;
   font-size: 1.5rem;
   color: #1a1a2e;
+  flex-shrink: 0;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 .stat-card {
   background: #fff;
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px;
   text-align: center;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   cursor: pointer;
@@ -32,13 +37,13 @@
 }
 
 .stat-value {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #1a1a2e;
 }
 
 .stat-label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #888;
   margin-top: 4px;
   text-transform: uppercase;
@@ -52,26 +57,35 @@
 .dashboard-panels {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
 }
 
 .panel {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   overflow: hidden;
 }
 
 .panel-title {
   margin: 0;
-  padding: 16px 20px;
+  padding: 14px 20px;
   font-size: 1rem;
   border-bottom: 1px solid #eee;
   color: #1a1a2e;
+  flex-shrink: 0;
 }
 
 .panel-content {
-  padding: 8px 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 4px 0;
 }
 
 .recent-hire-row {
@@ -174,6 +188,7 @@
 @media (max-width: 900px) {
   .dashboard-panels {
     grid-template-columns: 1fr;
+    overflow-y: auto;
   }
 }
 

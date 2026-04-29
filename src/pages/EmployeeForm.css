@@ -1,6 +1,13 @@
 .employee-form-page {
-  max-width: 800px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.employee-form-page .page-title {
+  flex-shrink: 0;
 }
 
 .emp-form {
@@ -16,57 +23,15 @@
   gap: 16px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group.full-width {
-  grid-column: 1 / -1;
-}
-
-.form-group label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #555;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-
-.form-group input,
-.form-group select {
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  transition: border-color 0.15s;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.15);
+.form-error {
+  font-size: 0.78rem;
+  color: #e53935;
+  margin-top: 2px;
 }
 
 .form-group input.error,
 .form-group select.error {
   border-color: #e53935;
-}
-
-.field-error {
-  font-size: 0.75rem;
-  color: #e53935;
-}
-
-.form-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid #eee;
 }
 
 @media (max-width: 600px) {

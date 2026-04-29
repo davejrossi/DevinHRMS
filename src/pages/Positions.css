@@ -1,6 +1,9 @@
 .positions-page {
-  max-width: 1400px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .pos-layout {
@@ -8,18 +11,27 @@
   grid-template-columns: 1fr 360px;
   gap: 24px;
   align-items: start;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .pos-list-panel {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .pos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 12px;
+  overflow-y: auto;
+  min-height: 0;
+  max-height: 100%;
+  padding-right: 4px;
 }
 
 .pos-card {
@@ -108,8 +120,8 @@
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  position: sticky;
-  top: 24px;
+  overflow-y: auto;
+  max-height: 100%;
 }
 
 .pos-form-panel h3 {
@@ -141,9 +153,6 @@
 @media (max-width: 900px) {
   .pos-layout {
     grid-template-columns: 1fr;
-  }
-
-  .pos-form-panel {
-    position: static;
+    overflow-y: auto;
   }
 }

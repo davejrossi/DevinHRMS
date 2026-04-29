@@ -1,20 +1,28 @@
 .analytics-page {
-  max-width: 1400px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.analytics-page > .page-title {
+  flex-shrink: 0;
 }
 
 /* KPI Cards */
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 14px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 .kpi-card {
   background: #fff;
   border-radius: 12px;
-  padding: 18px 16px;
+  padding: 14px 12px;
   text-align: center;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   border-top: 3px solid #e0e0e0;
@@ -27,7 +35,7 @@
 .kpi-purple { border-top-color: #7b1fa2; }
 
 .kpi-value {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #1a1a2e;
   line-height: 1;
@@ -40,25 +48,29 @@
 .kpi-purple .kpi-value { color: #7b1fa2; }
 
 .kpi-label {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: #888;
-  margin-top: 6px;
+  margin-top: 4px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
 }
 
-/* Analytics Grid */
+/* Analytics Grid - scrollable area */
 .analytics-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
 .analytics-panel {
   background: #fff;
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
@@ -67,10 +79,10 @@
 }
 
 .analytics-panel h3 {
-  margin: 0 0 16px;
-  font-size: 0.95rem;
+  margin: 0 0 12px;
+  font-size: 0.9rem;
   color: #1a1a2e;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   border-bottom: 1px solid #eee;
 }
 
@@ -78,7 +90,7 @@
 .chart-area {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .bar-row {
@@ -88,8 +100,8 @@
 }
 
 .bar-label {
-  width: 110px;
-  font-size: 0.82rem;
+  width: 100px;
+  font-size: 0.78rem;
   color: #555;
   flex-shrink: 0;
   text-align: right;
@@ -97,7 +109,7 @@
 
 .bar-track {
   flex: 1;
-  height: 22px;
+  height: 20px;
   background: #f5f5f5;
   border-radius: 6px;
   overflow: hidden;
@@ -117,8 +129,8 @@
 .bar-orange { background: linear-gradient(90deg, #ffa726, #e65100); }
 
 .bar-value {
-  width: 32px;
-  font-size: 0.82rem;
+  width: 28px;
+  font-size: 0.78rem;
   font-weight: 700;
   color: #1a1a2e;
   text-align: right;
@@ -128,8 +140,8 @@
 .quarter-chart {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
-  height: 180px;
+  gap: 6px;
+  height: 160px;
   padding-top: 10px;
 }
 
@@ -142,7 +154,7 @@
 }
 
 .quarter-value {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: #1a1a2e;
   margin-bottom: 4px;
@@ -151,7 +163,7 @@
 .quarter-bar-track {
   flex: 1;
   width: 100%;
-  max-width: 40px;
+  max-width: 36px;
   background: #f0f0f0;
   border-radius: 6px 6px 0 0;
   display: flex;
@@ -168,7 +180,7 @@
 }
 
 .quarter-label {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: #888;
   margin-top: 6px;
   text-align: center;
@@ -179,19 +191,19 @@
 .summary-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 12px;
 }
 
 .summary-item {
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 10px;
   background: #f8f9ff;
   border-radius: 8px;
 }
 
 .summary-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #888;
   text-transform: uppercase;
   letter-spacing: 0.3px;
@@ -199,24 +211,26 @@
 }
 
 .summary-value {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #1a1a2e;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* Vacant Positions */
 .vacant-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .vacant-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 8px 12px;
   background: #fafafa;
   border-radius: 8px;
   border-left: 3px solid #ff9800;
@@ -224,13 +238,13 @@
 
 .vacant-title {
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: #333;
   flex: 1;
 }
 
 .vacant-dept {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: #888;
 }
 
@@ -247,23 +261,23 @@
 @media (max-width: 500px) {
   .kpi-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
 
   .kpi-card {
-    padding: 14px 10px;
+    padding: 10px 8px;
   }
 
   .kpi-value {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   .bar-label {
-    width: 80px;
-    font-size: 0.75rem;
+    width: 70px;
+    font-size: 0.7rem;
   }
 
   .quarter-label {
-    font-size: 0.55rem;
+    font-size: 0.5rem;
   }
 }

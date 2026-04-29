@@ -1,6 +1,9 @@
 .departments-page {
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .dept-layout {
@@ -8,6 +11,9 @@
   grid-template-columns: 1fr 360px;
   gap: 24px;
   align-items: start;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .dept-tree-panel {
@@ -15,6 +21,9 @@
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  overflow-y: auto;
+  min-height: 0;
+  max-height: 100%;
 }
 
 .dept-tree-level {
@@ -75,8 +84,8 @@
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  position: sticky;
-  top: 24px;
+  overflow-y: auto;
+  max-height: 100%;
 }
 
 .dept-form-panel h3 {
@@ -108,9 +117,6 @@
 @media (max-width: 900px) {
   .dept-layout {
     grid-template-columns: 1fr;
-  }
-
-  .dept-form-panel {
-    position: static;
+    overflow-y: auto;
   }
 }
