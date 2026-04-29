@@ -1,0 +1,142 @@
+.employee-detail {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  margin-bottom: 16px;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  flex-wrap: wrap;
+}
+
+.detail-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #e3f2fd;
+  color: #1565c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.detail-header-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.detail-header-info h2 {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+  color: #1a1a2e;
+}
+
+.detail-subtitle {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.detail-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.detail-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.detail-card h3 {
+  margin: 0 0 16px;
+  font-size: 1rem;
+  color: #1a1a2e;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-field {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 0.9rem;
+}
+
+.field-label {
+  color: #888;
+}
+
+.field-value {
+  color: #333;
+  font-weight: 500;
+}
+
+.link {
+  color: #1565c0;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.reports-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.report-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f8f9ff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.report-item:hover {
+  background: #e3f2fd;
+}
+
+.report-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.report-role {
+  font-size: 0.78rem;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-header {
+    padding: 16px;
+  }
+}

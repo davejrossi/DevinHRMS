@@ -1,0 +1,149 @@
+.positions-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.pos-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.pos-list-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.pos-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.pos-card:hover {
+  border-color: #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pos-card.editing {
+  border-color: #4fc3f7;
+}
+
+.pos-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.pos-title {
+  font-weight: 700;
+  color: #333;
+}
+
+.level-badge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.level-entry { background: #e8f5e9; color: #2e7d32; }
+.level-mid { background: #e3f2fd; color: #1565c0; }
+.level-senior { background: #fff3e0; color: #e65100; }
+.level-lead { background: #f3e5f5; color: #7b1fa2; }
+.level-manager { background: #fce4ec; color: #c62828; }
+.level-director { background: #e0f2f1; color: #00695c; }
+.level-vp { background: #ede7f6; color: #4527a0; }
+.level-c-level { background: #fff8e1; color: #f57f17; }
+
+.pos-card-dept {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.pos-card-desc {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pos-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pos-emp-count {
+  font-size: 0.78rem;
+  color: #aaa;
+}
+
+.pos-card-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.pos-form-panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 24px;
+}
+
+.pos-form-panel h3 {
+  margin: 0 0 16px;
+  font-size: 1rem;
+  color: #1a1a2e;
+}
+
+.pos-form-panel .form-group {
+  margin-bottom: 12px;
+}
+
+.pos-form-panel textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.pos-form-panel textarea:focus {
+  outline: none;
+  border-color: #4fc3f7;
+  box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.15);
+}
+
+@media (max-width: 900px) {
+  .pos-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pos-form-panel {
+    position: static;
+  }
+}

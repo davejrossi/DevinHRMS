@@ -1,0 +1,139 @@
+.orgchart-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.orgchart-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.orgchart-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.org-node {
+  margin-left: 20px;
+  border-left: 2px solid #e0e0e0;
+}
+
+.orgchart-container > .org-node {
+  margin-left: 0;
+  border-left: none;
+}
+
+.org-node-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.org-node-expand {
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.expand-arrow {
+  font-size: 0.65rem;
+  color: #888;
+  display: inline-block;
+  transition: transform 0.15s;
+}
+
+.expand-arrow.expanded {
+  transform: rotate(90deg);
+}
+
+.org-dept-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: #e3f2fd;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.org-dept-badge:hover {
+  background: #bbdefb;
+}
+
+.org-dept-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1565c0;
+}
+
+.org-dept-count {
+  font-size: 0.7rem;
+  background: #1565c0;
+  color: #fff;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.org-node-children {
+  padding-left: 12px;
+}
+
+.org-employee {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  margin: 2px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.org-employee:hover {
+  background: #f5f6fa;
+}
+
+.org-emp-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f3e5f5;
+  color: #7b1fa2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.org-emp-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.org-emp-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.org-emp-title {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+@media (max-width: 600px) {
+  .orgchart-container {
+    padding: 12px;
+  }
+
+  .org-node {
+    margin-left: 12px;
+  }
+}
