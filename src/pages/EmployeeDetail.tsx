@@ -29,9 +29,9 @@ export default function EmployeeDetail() {
 
       <div className="detail-header">
         <div className="detail-avatar">{employee.firstName[0]}{employee.lastName[0]}</div>
-        <div className="detail-header-info">
-          <h2>{employee.firstName} {employee.lastName}</h2>
-          <div className="detail-subtitle">
+        <div className="detail-info">
+          <h2 className="detail-name">{employee.firstName} {employee.lastName}</h2>
+          <div className="detail-position">
             {position?.title ?? 'No Position'} &middot; {department?.name ?? 'No Department'}
           </div>
           <StatusBadge status={employee.status} />
@@ -42,40 +42,39 @@ export default function EmployeeDetail() {
       <div className="detail-grid">
         <div className="detail-card">
           <h3>Contact Information</h3>
-          <div className="detail-field">
-            <span className="field-label">Email</span>
-            <span className="field-value">{employee.email}</span>
+          <div className="detail-row">
+            <span className="detail-label">Email</span>
+            <span className="detail-value">{employee.email}</span>
           </div>
-          <div className="detail-field">
-            <span className="field-label">Phone</span>
-            <span className="field-value">{employee.phone || 'N/A'}</span>
+          <div className="detail-row">
+            <span className="detail-label">Phone</span>
+            <span className="detail-value">{employee.phone || 'N/A'}</span>
           </div>
         </div>
 
         <div className="detail-card">
           <h3>Employment</h3>
-          <div className="detail-field">
-            <span className="field-label">Hire Date</span>
-            <span className="field-value">{new Date(employee.hireDate).toLocaleDateString()}</span>
+          <div className="detail-row">
+            <span className="detail-label">Hire Date</span>
+            <span className="detail-value">{new Date(employee.hireDate).toLocaleDateString()}</span>
           </div>
-          <div className="detail-field">
-            <span className="field-label">Department</span>
-            <span className="field-value">{department?.name ?? 'Unassigned'}</span>
+          <div className="detail-row">
+            <span className="detail-label">Department</span>
+            <span className="detail-value">{department?.name ?? 'Unassigned'}</span>
           </div>
-          <div className="detail-field">
-            <span className="field-label">Position</span>
-            <span className="field-value">{position?.title ?? 'Unassigned'}</span>
+          <div className="detail-row">
+            <span className="detail-label">Position</span>
+            <span className="detail-value">{position?.title ?? 'Unassigned'}</span>
           </div>
-          <div className="detail-field">
-            <span className="field-label">Reports To</span>
-            <span className="field-value">
+          <div className="detail-row">
+            <span className="detail-label">Reports To</span>
+            <span className="detail-value">
               {manager ? (
-                <span
-                  className="link"
+                <a
                   onClick={() => navigate(`/employees/${manager.id}`)}
                 >
                   {manager.firstName} {manager.lastName}
-                </span>
+                </a>
               ) : (
                 'N/A'
               )}
@@ -83,20 +82,38 @@ export default function EmployeeDetail() {
           </div>
         </div>
 
+        {employee.skills && employee.skills.length > 0 && (
+          <div className="detail-card" style={{ gridColumn: '1 / -1' }}>
+            <h3>Skills &amp; Competencies</h3>
+            <div className="skills-display">
+              {employee.skills.map((skill, i) => (
+                <div key={i} className="skill-badge">
+                  <span className="skill-badge-name">{skill.name}</span>
+                  <span className="skill-badge-level">
+                    {Array.from({ length: 5 }, (_, j) => (
+                      <span key={j} className={`skill-dot ${j < skill.proficiency ? 'filled' : ''}`} />
+                    ))}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {directReports.length > 0 && (
-          <div className="detail-card full-width">
+          <div className="detail-card" style={{ gridColumn: '1 / -1' }}>
             <h3>Direct Reports ({directReports.length})</h3>
-            <div className="reports-list">
+            <div className="direct-reports-grid">
               {directReports.map((r) => (
                 <div
                   key={r.id}
-                  className="report-item"
+                  className="report-card"
                   onClick={() => navigate(`/employees/${r.id}`)}
                 >
                   <div className="emp-avatar">{r.firstName[0]}{r.lastName[0]}</div>
                   <div>
                     <div className="report-name">{r.firstName} {r.lastName}</div>
-                    <div className="report-role">{getPosition(r.positionId)?.title ?? 'Unassigned'}</div>
+                    <div className="report-title">{getPosition(r.positionId)?.title ?? 'Unassigned'}</div>
                   </div>
                   <StatusBadge status={r.status} />
                 </div>

@@ -1,24 +1,11 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import type { Department } from '../types';
-import { seedDepartments, seedPositions, seedEmployees } from '../utils/seedData';
+import { api } from '../api';
 import { HRMSContext } from './hrmsContext';
 import type { HRMSState, HRMSAction } from './hrmsContext';
 
-const STORAGE_KEY = 'hrms-data';
-
-function getInitialState(): HRMSState {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    return JSON.parse(stored);
-  }
-  return {
-    departments: seedDepartments,
-    positions: seedPositions,
-    employees: seedEmployees,
-  };
-}
+const emptyState: HRMSState = { departments: [], positions: [], employees: [] };
 
 function getAllChildDeptIds(departments: Department[], parentId: string): string[] {
   const children = departments.filter((d) => d.parentId === parentId);
@@ -33,15 +20,9 @@ function getAllChildDeptIds(departments: Department[], parentId: string): string
 function reducer(state: HRMSState, action: HRMSAction): HRMSState {
   switch (action.type) {
     case 'ADD_EMPLOYEE':
-      return {
-        ...state,
-        employees: [...state.employees, { ...action.payload, id: uuidv4(), avatar: '' }],
-      };
+      return { ...state, employees: [...state.employees, { ...action.payload, id: action.payload.id ?? '', avatar: '', skills: action.payload.skills ?? [] }] };
     case 'UPDATE_EMPLOYEE':
-      return {
-        ...state,
-        employees: state.employees.map((e) => (e.id === action.payload.id ? action.payload : e)),
-      };
+      return { ...state, employees: state.employees.map((e) => (e.id === action.payload.id ? action.payload : e)) };
     case 'DELETE_EMPLOYEE':
       return {
         ...state,
@@ -50,15 +31,9 @@ function reducer(state: HRMSState, action: HRMSAction): HRMSState {
           .map((e) => (e.managerId === action.payload ? { ...e, managerId: null } : e)),
       };
     case 'ADD_DEPARTMENT':
-      return {
-        ...state,
-        departments: [...state.departments, { ...action.payload, id: uuidv4() }],
-      };
+      return { ...state, departments: [...state.departments, { ...action.payload, id: action.payload.id ?? '' }] };
     case 'UPDATE_DEPARTMENT':
-      return {
-        ...state,
-        departments: state.departments.map((d) => (d.id === action.payload.id ? action.payload : d)),
-      };
+      return { ...state, departments: state.departments.map((d) => (d.id === action.payload.id ? action.payload : d)) };
     case 'DELETE_DEPARTMENT': {
       const deptIds = getAllChildDeptIds(state.departments, action.payload);
       deptIds.push(action.payload);
@@ -66,21 +41,13 @@ function reducer(state: HRMSState, action: HRMSAction): HRMSState {
         ...state,
         departments: state.departments.filter((d) => !deptIds.includes(d.id)),
         positions: state.positions.filter((p) => !deptIds.includes(p.departmentId)),
-        employees: state.employees.map((e) =>
-          deptIds.includes(e.departmentId) ? { ...e, departmentId: '', positionId: '' } : e
-        ),
+        employees: state.employees.filter((e) => !deptIds.includes(e.departmentId)),
       };
     }
     case 'ADD_POSITION':
-      return {
-        ...state,
-        positions: [...state.positions, { ...action.payload, id: uuidv4() }],
-      };
+      return { ...state, positions: [...state.positions, { ...action.payload, id: action.payload.id ?? '' }] };
     case 'UPDATE_POSITION':
-      return {
-        ...state,
-        positions: state.positions.map((p) => (p.id === action.payload.id ? action.payload : p)),
-      };
+      return { ...state, positions: state.positions.map((p) => (p.id === action.payload.id ? action.payload : p)) };
     case 'DELETE_POSITION':
       return {
         ...state,
@@ -97,11 +64,92 @@ function reducer(state: HRMSState, action: HRMSAction): HRMSState {
 }
 
 export default function HRMSProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, undefined, getInitialState);
+  const [state, rawDispatch] = useReducer(reducer, emptyState);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }, [state]);
+    Promise.all([api.getDepartments(), api.getPositions(), api.getEmployees()])
+      .then(([departments, positions, employees]) => {
+        rawDispatch({ type: 'LOAD_STATE', payload: { departments, positions, employees } });
+      })
+      .catch((err) => console.error('Failed to load data from API:', err));
+  }, []);
+
+  const dispatch = useCallback(async (action: HRMSAction) => {
+    try {
+      switch (action.type) {
+        case 'ADD_EMPLOYEE': {
+          const created = await api.createEmployee(action.payload);
+          if (created) {
+            rawDispatch({ type: 'ADD_EMPLOYEE', payload: created });
+            return;
+          }
+          break;
+        }
+        case 'UPDATE_EMPLOYEE': {
+          const updated = await api.updateEmployee(action.payload);
+          if (updated) {
+            rawDispatch({ type: 'UPDATE_EMPLOYEE', payload: updated });
+            return;
+          }
+          break;
+        }
+        case 'DELETE_EMPLOYEE':
+          await api.deleteEmployee(action.payload);
+          rawDispatch(action);
+          return;
+        case 'ADD_DEPARTMENT': {
+          const created = await api.createDepartment(action.payload);
+          if (created) {
+            rawDispatch({ type: 'ADD_DEPARTMENT', payload: created });
+            return;
+          }
+          break;
+        }
+        case 'UPDATE_DEPARTMENT': {
+          const updated = await api.updateDepartment(action.payload);
+          if (updated) {
+            rawDispatch({ type: 'UPDATE_DEPARTMENT', payload: updated });
+            return;
+          }
+          break;
+        }
+        case 'DELETE_DEPARTMENT': {
+          await api.deleteDepartment(action.payload);
+          const [departments, positions, employees] = await Promise.all([
+            api.getDepartments(), api.getPositions(), api.getEmployees()
+          ]);
+          rawDispatch({ type: 'LOAD_STATE', payload: { departments, positions, employees } });
+          return;
+        }
+        case 'ADD_POSITION': {
+          const created = await api.createPosition(action.payload);
+          if (created) {
+            rawDispatch({ type: 'ADD_POSITION', payload: created });
+            return;
+          }
+          break;
+        }
+        case 'UPDATE_POSITION': {
+          const updated = await api.updatePosition(action.payload);
+          if (updated) {
+            rawDispatch({ type: 'UPDATE_POSITION', payload: updated });
+            return;
+          }
+          break;
+        }
+        case 'DELETE_POSITION':
+          await api.deletePosition(action.payload);
+          rawDispatch(action);
+          return;
+        case 'LOAD_STATE':
+          rawDispatch(action);
+          return;
+      }
+    } catch (err) {
+      console.error('API action failed:', action.type, err);
+      throw err;
+    }
+  }, []);
 
   const getDepartment = (id: string) => state.departments.find((d) => d.id === id);
   const getPosition = (id: string) => state.positions.find((p) => p.id === id);

@@ -25,10 +25,12 @@ export default function Employees() {
     });
   }, [state.employees, search, deptFilter, statusFilter]);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (deleteId) {
-      dispatch({ type: 'DELETE_EMPLOYEE', payload: deleteId });
-      setDeleteId(null);
+      try {
+        await dispatch({ type: 'DELETE_EMPLOYEE', payload: deleteId });
+        setDeleteId(null);
+      } catch { setDeleteId(null); }
     }
   };
 
@@ -69,6 +71,7 @@ export default function Employees() {
           <option value="inactive">Inactive</option>
           <option value="onleave">On Leave</option>
         </select>
+        <span className="results-count">{filtered.length} of {state.employees.length}</span>
       </div>
 
       <div className="employees-table-wrapper">

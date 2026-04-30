@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useHRMS } from '../context/useHRMS';
 import ConfirmDialog from '../components/ConfirmDialog';
+import type { Skill, ProficiencyLevel } from '../types';
 import './Positions.css';
 
 const levels = [
@@ -25,41 +26,48 @@ export default function Positions() {
     departmentId: '',
     description: '',
     level: 'mid' as typeof levels[number]['value'],
+    requiredSkills: [] as Skill[],
   });
+  const [newSkillName, setNewSkillName] = useState('');
+  const [newSkillLevel, setNewSkillLevel] = useState<ProficiencyLevel>(3);
 
   const filtered = state.positions.filter((p) => !deptFilter || p.departmentId === deptFilter);
 
   const handleEdit = (id: string) => {
     const pos = state.positions.find((p) => p.id === id);
     if (pos) {
-      setForm({ title: pos.title, departmentId: pos.departmentId, description: pos.description, level: pos.level });
+      setForm({ title: pos.title, departmentId: pos.departmentId, description: pos.description, level: pos.level, requiredSkills: pos.requiredSkills ?? [] });
       setEditId(id);
       setShowAdd(false);
     }
   };
 
   const handleAdd = () => {
-    setForm({ title: '', departmentId: '', description: '', level: 'mid' });
+    setForm({ title: '', departmentId: '', description: '', level: 'mid', requiredSkills: [] });
     setEditId(null);
     setShowAdd(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!form.title.trim() || !form.departmentId) return;
-    if (editId) {
-      dispatch({ type: 'UPDATE_POSITION', payload: { ...form, id: editId } });
-    } else {
-      dispatch({ type: 'ADD_POSITION', payload: form });
-    }
-    setEditId(null);
-    setShowAdd(false);
+    try {
+      if (editId) {
+        await dispatch({ type: 'UPDATE_POSITION', payload: { ...form, id: editId } });
+      } else {
+        await dispatch({ type: 'ADD_POSITION', payload: form });
+      }
+      setEditId(null);
+      setShowAdd(false);
+    } catch { /* error logged by dispatch */ }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (deleteId) {
-      dispatch({ type: 'DELETE_POSITION', payload: deleteId });
-      setDeleteId(null);
-      if (editId === deleteId) setEditId(null);
+      try {
+        await dispatch({ type: 'DELETE_POSITION', payload: deleteId });
+        setDeleteId(null);
+        if (editId === deleteId) setEditId(null);
+      } catch { setDeleteId(null); }
     }
   };
 
@@ -156,6 +164,67 @@ export default function Positions() {
                 placeholder="Position description"
                 rows={3}
               />
+            </div>
+            <div className="form-group">
+              <label>Required Skills</label>
+              <div className="pos-skills-add">
+                <input
+                  type="text"
+                  placeholder="Skill name"
+                  value={newSkillName}
+                  onChange={(e) => setNewSkillName(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      if (newSkillName.trim() && !form.requiredSkills.some((s) => s.name.toLowerCase() === newSkillName.trim().toLowerCase())) {
+                        setForm({ ...form, requiredSkills: [...form.requiredSkills, { name: newSkillName.trim(), proficiency: newSkillLevel }] });
+                        setNewSkillName('');
+                      }
+                    }
+                  }}
+                />
+                <select value={newSkillLevel} onChange={(e) => setNewSkillLevel(Number(e.target.value) as ProficiencyLevel)}>
+                  {([1, 2, 3, 4, 5] as ProficiencyLevel[]).map((l) => (
+                    <option key={l} value={l}>{l}</option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  className="btn btn-sm"
+                  disabled={!newSkillName.trim()}
+                  onClick={() => {
+                    if (newSkillName.trim() && !form.requiredSkills.some((s) => s.name.toLowerCase() === newSkillName.trim().toLowerCase())) {
+                      setForm({ ...form, requiredSkills: [...form.requiredSkills, { name: newSkillName.trim(), proficiency: newSkillLevel }] });
+                      setNewSkillName('');
+                    }
+                  }}
+                >+</button>
+              </div>
+              {form.requiredSkills.length > 0 && (
+                <div className="pos-skills-list">
+                  {form.requiredSkills.map((skill, idx) => (
+                    <div key={idx} className="pos-skill-tag">
+                      <span>{skill.name}</span>
+                      <select
+                        value={skill.proficiency}
+                        onChange={(e) => {
+                          const updated = form.requiredSkills.map((s, i) => i === idx ? { ...s, proficiency: Number(e.target.value) as ProficiencyLevel } : s);
+                          setForm({ ...form, requiredSkills: updated });
+                        }}
+                      >
+                        {([1, 2, 3, 4, 5] as ProficiencyLevel[]).map((l) => (
+                          <option key={l} value={l}>{l}</option>
+                        ))}
+                      </select>
+                      <button
+                        type="button"
+                        className="pos-skill-remove"
+                        onClick={() => setForm({ ...form, requiredSkills: form.requiredSkills.filter((_, i) => i !== idx) })}
+                      >&times;</button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="form-actions">
               <button className="btn btn-secondary" onClick={() => { setEditId(null); setShowAdd(false); }}>Cancel</button>

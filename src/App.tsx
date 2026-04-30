@@ -9,6 +9,7 @@ import Departments from './pages/Departments';
 import Positions from './pages/Positions';
 import OrgChart from './pages/OrgChart';
 import Analytics from './pages/Analytics';
+import CareerPlanning from './pages/CareerPlanning';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/positions" element={<Positions />} />
             <Route path="/org-chart" element={<OrgChart />} />
             <Route path="/analytics" element={<Analytics />} />
+            <Route path="/career-planning" element={<CareerPlanning />} />
           </Route>
         </Routes>
       </BrowserRouter>

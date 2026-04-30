@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useHRMS } from '../context/useHRMS';
-import type { EmployeeFormData } from '../types';
+import type { EmployeeFormData, Skill, ProficiencyLevel } from '../types';
 import './EmployeeForm.css';
 
 const emptyForm: EmployeeFormData = {
@@ -14,6 +14,15 @@ const emptyForm: EmployeeFormData = {
   positionId: '',
   managerId: null,
   status: 'active',
+  skills: [],
+};
+
+const PROFICIENCY_LABELS: Record<ProficiencyLevel, string> = {
+  1: 'Beginner',
+  2: 'Basic',
+  3: 'Intermediate',
+  4: 'Advanced',
+  5: 'Expert',
 };
 
 export default function EmployeeForm() {
@@ -22,19 +31,21 @@ export default function EmployeeForm() {
   const { state, dispatch, getEmployee, getPositionsForDepartment } = useHRMS();
   const isEdit = !!id;
 
-  const [form, setForm] = useState<EmployeeFormData>(() => {
-    if (isEdit && id) {
-      const emp = state.employees.find((e) => e.id === id);
-      if (emp) {
-        const { id: _id, avatar: _avatar, ...rest } = emp;
-        void _id;
-        void _avatar;
-        return rest;
-      }
-    }
-    return emptyForm;
-  });
+  const existingEmployee = isEdit && id ? state.employees.find((e) => e.id === id) : undefined;
+
+  const [form, setForm] = useState<EmployeeFormData>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [loadedEmpId, setLoadedEmpId] = useState<string | null>(null);
+
+  if (existingEmployee && loadedEmpId !== existingEmployee.id) {
+    const { id: _id, avatar: _avatar, ...rest } = existingEmployee;
+    void _id;
+    void _avatar;
+    setForm({ ...rest, skills: rest.skills ?? [] });
+    setLoadedEmpId(existingEmployee.id);
+  }
+  const [newSkillName, setNewSkillName] = useState('');
+  const [newSkillLevel, setNewSkillLevel] = useState<ProficiencyLevel>(3);
 
   const positions = form.departmentId ? getPositionsForDepartment(form.departmentId) : [];
   const managers = state.employees.filter((e) => e.id !== id);
@@ -51,19 +62,23 @@ export default function EmployeeForm() {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
-    if (isEdit && id) {
-      const existing = getEmployee(id);
-      if (existing) {
-        dispatch({ type: 'UPDATE_EMPLOYEE', payload: { ...existing, ...form } });
+    try {
+      if (isEdit && id) {
+        const existing = getEmployee(id);
+        if (existing) {
+          await dispatch({ type: 'UPDATE_EMPLOYEE', payload: { ...existing, ...form } });
+        }
+      } else {
+        await dispatch({ type: 'ADD_EMPLOYEE', payload: form });
       }
-    } else {
-      dispatch({ type: 'ADD_EMPLOYEE', payload: form });
+      navigate('/employees');
+    } catch (err) {
+      console.error('Failed to save employee:', err);
     }
-    navigate('/employees');
   };
 
   const handleChange = (field: keyof EmployeeFormData, value: string | null) => {
@@ -96,7 +111,7 @@ export default function EmployeeForm() {
               onChange={(e) => handleChange('firstName', e.target.value)}
               className={errors.firstName ? 'error' : ''}
             />
-            {errors.firstName && <span className="field-error">{errors.firstName}</span>}
+            {errors.firstName && <span className="form-error">{errors.firstName}</span>}
           </div>
           <div className="form-group">
             <label>Last Name *</label>
@@ -106,7 +121,7 @@ export default function EmployeeForm() {
               onChange={(e) => handleChange('lastName', e.target.value)}
               className={errors.lastName ? 'error' : ''}
             />
-            {errors.lastName && <span className="field-error">{errors.lastName}</span>}
+            {errors.lastName && <span className="form-error">{errors.lastName}</span>}
           </div>
           <div className="form-group">
             <label>Email *</label>
@@ -116,7 +131,7 @@ export default function EmployeeForm() {
               onChange={(e) => handleChange('email', e.target.value)}
               className={errors.email ? 'error' : ''}
             />
-            {errors.email && <span className="field-error">{errors.email}</span>}
+            {errors.email && <span className="form-error">{errors.email}</span>}
           </div>
           <div className="form-group">
             <label>Phone</label>
@@ -134,7 +149,7 @@ export default function EmployeeForm() {
               onChange={(e) => handleChange('hireDate', e.target.value)}
               className={errors.hireDate ? 'error' : ''}
             />
-            {errors.hireDate && <span className="field-error">{errors.hireDate}</span>}
+            {errors.hireDate && <span className="form-error">{errors.hireDate}</span>}
           </div>
           <div className="form-group">
             <label>Status</label>
@@ -156,7 +171,7 @@ export default function EmployeeForm() {
                 <option key={d.id} value={d.id}>{d.name}</option>
               ))}
             </select>
-            {errors.departmentId && <span className="field-error">{errors.departmentId}</span>}
+            {errors.departmentId && <span className="form-error">{errors.departmentId}</span>}
           </div>
           <div className="form-group">
             <label>Position</label>
@@ -183,6 +198,73 @@ export default function EmployeeForm() {
               ))}
             </select>
           </div>
+        </div>
+
+        <div className="skills-section">
+          <h3>Skills &amp; Competencies</h3>
+          <div className="skills-add-row">
+            <input
+              type="text"
+              placeholder="Skill name"
+              value={newSkillName}
+              onChange={(e) => setNewSkillName(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  if (newSkillName.trim() && !form.skills.some((s) => s.name.toLowerCase() === newSkillName.trim().toLowerCase())) {
+                    setForm((prev) => ({ ...prev, skills: [...prev.skills, { name: newSkillName.trim(), proficiency: newSkillLevel }] }));
+                    setNewSkillName('');
+                  }
+                }
+              }}
+            />
+            <select value={newSkillLevel} onChange={(e) => setNewSkillLevel(Number(e.target.value) as ProficiencyLevel)}>
+              {([1, 2, 3, 4, 5] as ProficiencyLevel[]).map((l) => (
+                <option key={l} value={l}>{l} - {PROFICIENCY_LABELS[l]}</option>
+              ))}
+            </select>
+            <button
+              type="button"
+              className="btn btn-sm btn-primary"
+              disabled={!newSkillName.trim() || form.skills.some((s) => s.name.toLowerCase() === newSkillName.trim().toLowerCase())}
+              onClick={() => {
+                if (newSkillName.trim()) {
+                  setForm((prev) => ({ ...prev, skills: [...prev.skills, { name: newSkillName.trim(), proficiency: newSkillLevel }] }));
+                  setNewSkillName('');
+                }
+              }}
+            >
+              Add
+            </button>
+          </div>
+          {form.skills.length > 0 && (
+            <div className="skills-list">
+              {form.skills.map((skill, idx) => (
+                <div key={idx} className="skill-tag">
+                  <span className="skill-name">{skill.name}</span>
+                  <select
+                    className="skill-level-select"
+                    value={skill.proficiency}
+                    onChange={(e) => {
+                      const updated: Skill[] = form.skills.map((s, i) => i === idx ? { ...s, proficiency: Number(e.target.value) as ProficiencyLevel } : s);
+                      setForm((prev) => ({ ...prev, skills: updated }));
+                    }}
+                  >
+                    {([1, 2, 3, 4, 5] as ProficiencyLevel[]).map((l) => (
+                      <option key={l} value={l}>{l}</option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    className="skill-remove"
+                    onClick={() => setForm((prev) => ({ ...prev, skills: prev.skills.filter((_, i) => i !== idx) }))}
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="form-actions">
           <button type="button" className="btn btn-secondary" onClick={() => navigate('/employees')}>Cancel</button>

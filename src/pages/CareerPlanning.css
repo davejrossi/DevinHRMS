@@ -1,0 +1,344 @@
+.career-planning-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cp-controls {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  background: #fff;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.cp-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 140px;
+}
+
+.cp-control-group label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.cp-control-group select,
+.cp-control-group input[type="range"] {
+  padding: 5px 8px;
+  border: 1px solid #cbd5e0;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+}
+
+.cp-control-group input[type="range"] {
+  padding: 0;
+  margin-top: 3px;
+}
+
+/* Employee summary */
+.cp-employee-summary {
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.cp-emp-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.cp-emp-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.cp-emp-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #2d3748;
+}
+
+.cp-emp-role {
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.cp-emp-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.cp-skill-chip {
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
+  border-radius: 3px;
+  padding: 2px 8px;
+  font-size: 0.6875rem;
+  color: #475569;
+}
+
+.cp-skill-chip strong {
+  color: #1d4ed8;
+  margin-left: 2px;
+}
+
+/* Results */
+.cp-results {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.cp-match-list {
+  min-width: 0;
+}
+
+.cp-match-header-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 100px 180px 60px;
+  gap: 10px;
+  padding: 8px 14px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #718096;
+  letter-spacing: 0.4px;
+  border-bottom: 2px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  background: #f7fafc;
+  z-index: 2;
+}
+
+.cp-match-item {
+  border-bottom: 1px solid #edf2f7;
+}
+
+.cp-match-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 100px 180px 60px;
+  gap: 10px;
+  padding: 8px 14px;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.cp-match-row:hover {
+  background: #f7fafc;
+}
+
+.cp-match-title {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.8125rem;
+}
+
+.cp-match-dept {
+  color: #4a5568;
+  font-size: 0.75rem;
+}
+
+.cp-match-gaps {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+/* Fit bar */
+.fit-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fit-bar-container .fit-bar {
+  height: 6px;
+  border-radius: 3px;
+  flex: none;
+  transition: width 0.3s;
+}
+
+.fit-score {
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 32px;
+}
+
+/* Level badge */
+.level-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  text-align: center;
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.level-entry { background: #eff6ff; color: #3b82f6; }
+.level-mid { background: #dbeafe; color: #2563eb; }
+.level-senior { background: #dbeafe; color: #1d4ed8; }
+.level-lead { background: #bfdbfe; color: #1e40af; }
+.level-manager { background: #bfdbfe; color: #1e3a8a; }
+.level-director { background: #93c5fd; color: #1e3a8a; }
+.level-vp { background: #60a5fa; color: #fff; }
+.level-c-level { background: #2563eb; color: #fff; }
+
+/* Expanded detail */
+.cp-match-detail {
+  padding: 12px 16px;
+  background: #f7fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.cp-detail-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cp-detail-col h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Skill comparison row */
+.skill-comparison-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0;
+  font-size: 0.75rem;
+}
+
+.skill-comparison-row.met .scr-name { color: #1d4ed8; }
+.skill-comparison-row.gap .scr-name { color: #64748b; }
+
+.scr-name {
+  flex: 1;
+  font-weight: 600;
+  min-width: 0;
+}
+
+.scr-dots {
+  display: flex;
+  gap: 2px;
+}
+
+.scr-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #edf2f7;
+  border: 1px solid #cbd5e0;
+}
+
+.scr-dot.emp-filled {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.scr-dot.req-mark:not(.emp-filled) {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+.scr-label {
+  font-size: 0.6875rem;
+  color: #718096;
+  min-width: 22px;
+  text-align: center;
+}
+
+/* Development needed */
+.dev-needed-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  font-size: 0.75rem;
+}
+
+.dev-skill {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.dev-gap {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.extra-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.extra-skill-chip {
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .cp-controls {
+    flex-direction: column;
+  }
+
+  .cp-match-header-row,
+  .cp-match-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+
+  .cp-match-header-row span:nth-child(n+3),
+  .cp-match-row span:nth-child(n+3) {
+    display: none;
+  }
+
+  .cp-detail-columns {
+    grid-template-columns: 1fr;
+  }
+}

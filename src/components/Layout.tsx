@@ -9,6 +9,7 @@ const navItems = [
   { to: '/positions', label: 'Positions', icon: '⊡' },
   { to: '/org-chart', label: 'Org Chart', icon: '⋈' },
   { to: '/analytics', label: 'Analytics', icon: '⊕' },
+  { to: '/career-planning', label: 'Career Plan', icon: '⊜' },
 ];
 
 export default function Layout() {

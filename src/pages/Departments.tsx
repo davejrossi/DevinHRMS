@@ -27,25 +27,29 @@ export default function Departments() {
     setShowAdd(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!form.name.trim()) return;
     const payload = { name: form.name, parentId: form.parentId || null, description: form.description };
-    if (editId) {
-      dispatch({ type: 'UPDATE_DEPARTMENT', payload: { ...payload, id: editId } });
-    } else {
-      dispatch({ type: 'ADD_DEPARTMENT', payload });
-    }
-    setEditId(null);
-    setShowAdd(false);
+    try {
+      if (editId) {
+        await dispatch({ type: 'UPDATE_DEPARTMENT', payload: { ...payload, id: editId } });
+      } else {
+        await dispatch({ type: 'ADD_DEPARTMENT', payload });
+      }
+      setEditId(null);
+      setShowAdd(false);
+    } catch { /* error logged by dispatch */ }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (deleteId) {
-      dispatch({ type: 'DELETE_DEPARTMENT', payload: deleteId });
-      setDeleteId(null);
-      if (editId === deleteId) {
-        setEditId(null);
-      }
+      try {
+        await dispatch({ type: 'DELETE_DEPARTMENT', payload: deleteId });
+        setDeleteId(null);
+        if (editId === deleteId) {
+          setEditId(null);
+        }
+      } catch { setDeleteId(null); }
     }
   };
 
@@ -113,7 +117,15 @@ export default function Departments() {
               >
                 <option value="">None (Top Level)</option>
                 {state.departments
-                  .filter((d) => d.id !== editId)
+                  .filter((d) => {
+                    if (!editId) return true;
+                    if (d.id === editId) return false;
+                    const getDescs = (parentId: string): string[] => {
+                      const children = state.departments.filter((c) => c.parentId === parentId);
+                      return children.flatMap((c) => [c.id, ...getDescs(c.id)]);
+                    };
+                    return !getDescs(editId).includes(d.id);
+                  })
                   .map((d) => (
                     <option key={d.id} value={d.id}>{d.name}</option>
                   ))}
