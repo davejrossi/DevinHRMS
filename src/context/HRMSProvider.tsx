@@ -41,9 +41,7 @@ function reducer(state: HRMSState, action: HRMSAction): HRMSState {
         ...state,
         departments: state.departments.filter((d) => !deptIds.includes(d.id)),
         positions: state.positions.filter((p) => !deptIds.includes(p.departmentId)),
-        employees: state.employees.map((e) =>
-          deptIds.includes(e.departmentId) ? { ...e, departmentId: '', positionId: '' } : e
-        ),
+        employees: state.employees.filter((e) => !deptIds.includes(e.departmentId)),
       };
     }
     case 'ADD_POSITION':
@@ -115,10 +113,14 @@ export default function HRMSProvider({ children }: { children: ReactNode }) {
           }
           break;
         }
-        case 'DELETE_DEPARTMENT':
+        case 'DELETE_DEPARTMENT': {
           await api.deleteDepartment(action.payload);
-          rawDispatch(action);
+          const [departments, positions, employees] = await Promise.all([
+            api.getDepartments(), api.getPositions(), api.getEmployees()
+          ]);
+          rawDispatch({ type: 'LOAD_STATE', payload: { departments, positions, employees } });
           return;
+        }
         case 'ADD_POSITION': {
           const created = await api.createPosition(action.payload);
           if (created) {
@@ -145,9 +147,7 @@ export default function HRMSProvider({ children }: { children: ReactNode }) {
       }
     } catch (err) {
       console.error('API action failed:', action.type, err);
-      return;
     }
-    rawDispatch(action);
   }, []);
 
   const getDepartment = (id: string) => state.departments.find((d) => d.id === id);
