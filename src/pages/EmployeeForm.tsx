@@ -31,19 +31,19 @@ export default function EmployeeForm() {
   const { state, dispatch, getEmployee, getPositionsForDepartment } = useHRMS();
   const isEdit = !!id;
 
-  const [form, setForm] = useState<EmployeeFormData>(() => {
-    if (isEdit && id) {
-      const emp = state.employees.find((e) => e.id === id);
-      if (emp) {
-        const { id: _id, avatar: _avatar, ...rest } = emp;
-        void _id;
-        void _avatar;
-        return { ...rest, skills: rest.skills ?? [] };
-      }
-    }
-    return emptyForm;
-  });
+  const existingEmployee = isEdit && id ? state.employees.find((e) => e.id === id) : undefined;
+
+  const [form, setForm] = useState<EmployeeFormData>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [loadedEmpId, setLoadedEmpId] = useState<string | null>(null);
+
+  if (existingEmployee && loadedEmpId !== existingEmployee.id) {
+    const { id: _id, avatar: _avatar, ...rest } = existingEmployee;
+    void _id;
+    void _avatar;
+    setForm({ ...rest, skills: rest.skills ?? [] });
+    setLoadedEmpId(existingEmployee.id);
+  }
   const [newSkillName, setNewSkillName] = useState('');
   const [newSkillLevel, setNewSkillLevel] = useState<ProficiencyLevel>(3);
 
@@ -62,19 +62,23 @@ export default function EmployeeForm() {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
-    if (isEdit && id) {
-      const existing = getEmployee(id);
-      if (existing) {
-        dispatch({ type: 'UPDATE_EMPLOYEE', payload: { ...existing, ...form } });
+    try {
+      if (isEdit && id) {
+        const existing = getEmployee(id);
+        if (existing) {
+          await dispatch({ type: 'UPDATE_EMPLOYEE', payload: { ...existing, ...form } });
+        }
+      } else {
+        await dispatch({ type: 'ADD_EMPLOYEE', payload: form });
       }
-    } else {
-      dispatch({ type: 'ADD_EMPLOYEE', payload: form });
+      navigate('/employees');
+    } catch (err) {
+      console.error('Failed to save employee:', err);
     }
-    navigate('/employees');
   };
 
   const handleChange = (field: keyof EmployeeFormData, value: string | null) => {

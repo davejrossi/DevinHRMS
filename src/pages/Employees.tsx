@@ -25,9 +25,9 @@ export default function Employees() {
     });
   }, [state.employees, search, deptFilter, statusFilter]);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (deleteId) {
-      dispatch({ type: 'DELETE_EMPLOYEE', payload: deleteId });
+      await dispatch({ type: 'DELETE_EMPLOYEE', payload: deleteId });
       setDeleteId(null);
     }
   };

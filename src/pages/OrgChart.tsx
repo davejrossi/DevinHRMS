@@ -157,9 +157,15 @@ export default function OrgChart() {
 
   const resetZoom = () => { setZoom(1); setPan({ x: 0, y: 0 }); };
 
-  const [expandedDepts, setExpandedDepts] = useState<Set<string>>(() => {
-    return new Set(state.departments.map((d) => d.id));
-  });
+  const [expandedDepts, setExpandedDepts] = useState<Set<string>>(new Set());
+  const initialExpanded = useRef(false);
+
+  useEffect(() => {
+    if (state.departments.length > 0 && !initialExpanded.current) {
+      setExpandedDepts(new Set(state.departments.map((d) => d.id)));
+      initialExpanded.current = true;
+    }
+  }, [state.departments]);
 
   const toggleDept = useCallback((id: string) => {
     setExpandedDepts((prev) => {

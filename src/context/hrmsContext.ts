@@ -9,7 +9,7 @@ export interface HRMSState {
 
 export interface HRMSContextType {
   state: HRMSState;
-  dispatch: (action: HRMSAction) => void;
+  dispatch: (action: HRMSAction) => Promise<void>;
   getDepartment: (id: string) => Department | undefined;
   getPosition: (id: string) => Position | undefined;
   getEmployee: (id: string) => Employee | undefined;

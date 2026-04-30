@@ -48,20 +48,20 @@ export default function Positions() {
     setShowAdd(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!form.title.trim() || !form.departmentId) return;
     if (editId) {
-      dispatch({ type: 'UPDATE_POSITION', payload: { ...form, id: editId } });
+      await dispatch({ type: 'UPDATE_POSITION', payload: { ...form, id: editId } });
     } else {
-      dispatch({ type: 'ADD_POSITION', payload: form });
+      await dispatch({ type: 'ADD_POSITION', payload: form });
     }
     setEditId(null);
     setShowAdd(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (deleteId) {
-      dispatch({ type: 'DELETE_POSITION', payload: deleteId });
+      await dispatch({ type: 'DELETE_POSITION', payload: deleteId });
       setDeleteId(null);
       if (editId === deleteId) setEditId(null);
     }

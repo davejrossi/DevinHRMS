@@ -186,7 +186,7 @@
 .fit-bar-container .fit-bar {
   height: 6px;
   border-radius: 3px;
-  flex: 1;
+  flex: none;
   transition: width 0.3s;
 }
 
