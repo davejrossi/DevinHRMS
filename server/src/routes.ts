@@ -40,7 +40,8 @@ router.delete('/departments/:id', (req, res) => {
   const placeholders = deptIds.map(() => '?').join(',');
 
   const tx = db.transaction(() => {
-    db.prepare(`UPDATE employees SET department_id = '', position_id = '' WHERE department_id IN (${placeholders})`).run(...deptIds);
+    db.prepare(`DELETE FROM employee_skills WHERE employee_id IN (SELECT id FROM employees WHERE department_id IN (${placeholders}))`).run(...deptIds);
+    db.prepare(`DELETE FROM employees WHERE department_id IN (${placeholders})`).run(...deptIds);
     db.prepare(`DELETE FROM position_skills WHERE position_id IN (SELECT id FROM positions WHERE department_id IN (${placeholders}))`).run(...deptIds);
     db.prepare(`DELETE FROM positions WHERE department_id IN (${placeholders})`).run(...deptIds);
     db.prepare(`DELETE FROM departments WHERE id IN (${placeholders})`).run(...deptIds);

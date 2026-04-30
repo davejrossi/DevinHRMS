@@ -145,6 +145,7 @@ export default function HRMSProvider({ children }: { children: ReactNode }) {
       }
     } catch (err) {
       console.error('API action failed:', action.type, err);
+      return;
     }
     rawDispatch(action);
   }, []);
