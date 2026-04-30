@@ -1,8 +1,24 @@
-const API_BASE = import.meta.env.VITE_API_URL || '/api';
+function parseApiConfig() {
+  const raw = import.meta.env.VITE_API_URL || '/api';
+  try {
+    const url = new URL(raw);
+    if (url.username) {
+      const creds = btoa(`${decodeURIComponent(url.username)}:${decodeURIComponent(url.password)}`);
+      url.username = '';
+      url.password = '';
+      return { base: url.toString().replace(/\/$/, ''), auth: `Basic ${creds}` };
+    }
+  } catch { /* relative URL, no parsing needed */ }
+  return { base: raw, auth: '' };
+}
+
+const { base: API_BASE, auth: API_AUTH } = parseApiConfig();
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (API_AUTH) headers['Authorization'] = API_AUTH;
   const res = await fetch(`${API_BASE}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     ...options,
   });
   if (res.status === 204) return undefined as T;
