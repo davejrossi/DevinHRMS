@@ -7,65 +7,66 @@
 }
 
 .page-title {
-  margin: 0 0 16px;
-  font-size: 1.5rem;
-  color: #1a1a2e;
+  margin: 0 0 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a202c;
   flex-shrink: 0;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 14px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
   flex-shrink: 0;
 }
 
 .stat-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 4px;
+  padding: 12px;
   text-align: center;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: border-color 0.12s;
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #a0aec0;
 }
 
 .stat-value {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #1a202c;
 }
 
 .stat-label {
-  font-size: 0.75rem;
-  color: #888;
-  margin-top: 4px;
+  font-size: 0.6875rem;
+  color: #718096;
+  margin-top: 2px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
-.stat-active .stat-value { color: #2e7d32; }
-.stat-leave .stat-value { color: #e65100; }
-.stat-inactive .stat-value { color: #c62828; }
+.stat-active .stat-value { color: #276749; }
+.stat-leave .stat-value { color: #c05621; }
+.stat-inactive .stat-value { color: #c53030; }
 
 .dashboard-panels {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 12px;
   flex: 1;
   min-height: 0;
 }
 
 .panel {
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -74,43 +75,47 @@
 
 .panel-title {
   margin: 0;
-  padding: 14px 20px;
-  font-size: 1rem;
-  border-bottom: 1px solid #eee;
-  color: #1a1a2e;
+  padding: 10px 16px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+  color: #1a202c;
   flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .panel-content {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  padding: 4px 0;
+  padding: 2px 0;
 }
 
 .recent-hire-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 20px;
+  gap: 10px;
+  padding: 8px 16px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.1s;
+  border-bottom: 1px solid #f7fafc;
 }
 
 .recent-hire-row:hover {
-  background: #f8f9ff;
+  background: #f7fafc;
 }
 
 .hire-avatar {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: #e3f2fd;
-  color: #1565c0;
+  background: #ebf4ff;
+  color: #2b6cb0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   flex-shrink: 0;
 }
@@ -122,13 +127,13 @@
 
 .hire-name {
   font-weight: 600;
-  font-size: 0.9rem;
-  color: #333;
+  font-size: 0.8125rem;
+  color: #2d3748;
 }
 
 .hire-detail {
-  font-size: 0.78rem;
-  color: #888;
+  font-size: 0.75rem;
+  color: #718096;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -138,49 +143,49 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 4px;
+  gap: 2px;
   flex-shrink: 0;
 }
 
 .hire-date {
-  font-size: 0.75rem;
-  color: #aaa;
+  font-size: 0.6875rem;
+  color: #a0aec0;
 }
 
 .dept-stat-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 20px;
+  gap: 10px;
+  padding: 7px 16px;
 }
 
 .dept-stat-name {
-  width: 120px;
-  font-size: 0.85rem;
+  width: 110px;
+  font-size: 0.8125rem;
   font-weight: 500;
-  color: #333;
+  color: #2d3748;
   flex-shrink: 0;
 }
 
 .dept-stat-bar-container {
   flex: 1;
-  height: 8px;
-  background: #f0f0f0;
-  border-radius: 4px;
+  height: 6px;
+  background: #edf2f7;
+  border-radius: 3px;
   overflow: hidden;
 }
 
 .dept-stat-bar {
   height: 100%;
-  background: linear-gradient(90deg, #4fc3f7, #1565c0);
-  border-radius: 4px;
+  background: #3182ce;
+  border-radius: 3px;
   transition: width 0.3s;
 }
 
 .dept-stat-count {
-  font-size: 0.85rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #1a202c;
   width: 24px;
   text-align: right;
 }

@@ -8,8 +8,8 @@
 
 .dept-layout {
   display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 24px;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
   align-items: start;
   flex: 1;
   min-height: 0;
@@ -18,9 +18,9 @@
 
 .dept-tree-panel {
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
   overflow-y: auto;
   min-height: 0;
   max-height: 100%;
@@ -29,33 +29,33 @@
 .dept-tree-level {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .dept-tree-node {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .dept-node-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid #eee;
-  transition: all 0.15s;
+  padding: 8px 12px;
+  border-radius: 3px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.12s;
 }
 
 .dept-node-card:hover {
-  border-color: #ccc;
-  background: #f8f9ff;
+  border-color: #a0aec0;
+  background: #f7fafc;
 }
 
 .dept-node-card.editing {
-  border-color: #4fc3f7;
-  background: #e3f2fd;
+  border-color: #3182ce;
+  background: #ebf8ff;
 }
 
 .dept-node-info {
@@ -65,53 +65,57 @@
 
 .dept-node-name {
   font-weight: 600;
-  color: #333;
+  color: #2d3748;
+  font-size: 0.8125rem;
 }
 
 .dept-node-count {
-  font-size: 0.78rem;
-  color: #888;
-  margin-left: 8px;
+  font-size: 0.75rem;
+  color: #718096;
+  margin-left: 6px;
 }
 
 .dept-node-actions {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
 .dept-form-panel {
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
   overflow-y: auto;
   max-height: 100%;
 }
 
 .dept-form-panel h3 {
-  margin: 0 0 16px;
-  font-size: 1rem;
-  color: #1a1a2e;
+  margin: 0 0 12px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1a202c;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .dept-form-panel .form-group {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .dept-form-panel textarea {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e0;
+  border-radius: 3px;
+  font-size: 0.8125rem;
   font-family: inherit;
   resize: vertical;
 }
 
 .dept-form-panel textarea:focus {
   outline: none;
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.15);
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
 }
 
 @media (max-width: 900px) {

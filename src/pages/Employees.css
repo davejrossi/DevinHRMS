@@ -10,16 +10,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   flex-shrink: 0;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
 }
 
 .filters-bar {
   display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
   flex-shrink: 0;
   align-items: center;
@@ -27,43 +27,42 @@
 
 .search-input {
   flex: 1;
-  min-width: 200px;
-  padding: 10px 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  min-width: 180px;
+  padding: 7px 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 3px;
+  font-size: 0.8125rem;
   background: #fff;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.15);
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
 }
 
 .filter-select {
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e0;
+  border-radius: 3px;
+  font-size: 0.8125rem;
   background: #fff;
   cursor: pointer;
 }
 
 .results-count {
-  font-size: 0.8rem;
-  color: #888;
+  font-size: 0.75rem;
+  color: #718096;
   white-space: nowrap;
   font-weight: 600;
 }
 
-/* Table wrapper fills remaining space and scrolls internally */
 .employees-table-wrapper {
   flex: 1;
   min-height: 0;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
   overflow: auto;
   position: relative;
 }
@@ -77,40 +76,41 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  background: #fff;
+  background: #f7fafc;
 }
 
 .employees-table th {
   text-align: left;
-  padding: 12px 16px;
-  font-size: 0.78rem;
+  padding: 8px 12px;
+  font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #888;
-  border-bottom: 2px solid #eee;
+  color: #718096;
+  border-bottom: 2px solid #e2e8f0;
   white-space: nowrap;
-  background: #fff;
+  background: #f7fafc;
+  font-weight: 600;
 }
 
 .employees-table td {
-  padding: 10px 16px;
-  font-size: 0.9rem;
-  border-bottom: 1px solid #f5f5f5;
+  padding: 7px 12px;
+  font-size: 0.8125rem;
+  border-bottom: 1px solid #edf2f7;
   vertical-align: middle;
   white-space: nowrap;
 }
 
 .employees-table tbody tr:hover {
-  background: #f8f9ff;
+  background: #f7fafc;
 }
 
 .emp-name-cell {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   font-weight: 600;
-  color: #1565c0;
+  color: #2b6cb0;
   white-space: nowrap;
 }
 
@@ -119,85 +119,86 @@
 }
 
 .emp-avatar {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: #e3f2fd;
-  color: #1565c0;
+  background: #ebf4ff;
+  color: #2b6cb0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: 0.625rem;
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .action-btns {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
 .text-muted {
-  color: #bbb;
+  color: #a0aec0;
   font-style: italic;
 }
 
 .empty-row {
   text-align: center;
-  padding: 40px 16px !important;
-  color: #aaa;
+  padding: 32px 12px !important;
+  color: #a0aec0;
 }
 
-/* Mobile cards - hidden on desktop */
+/* Mobile cards */
 .employees-cards {
   display: none;
 }
 
 .emp-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 1px solid #e2e8f0;
   cursor: pointer;
 }
 
 .emp-card-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
 .emp-card-name {
   font-weight: 600;
-  color: #333;
+  color: #2d3748;
+  font-size: 0.8125rem;
 }
 
 .emp-card-detail {
-  font-size: 0.8rem;
-  color: #888;
+  font-size: 0.75rem;
+  color: #718096;
 }
 
 .emp-card-body {
-  font-size: 0.85rem;
-  color: #555;
+  font-size: 0.8125rem;
+  color: #4a5568;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 12px;
+  gap: 2px;
+  margin-bottom: 8px;
 }
 
 .emp-card-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   justify-content: flex-end;
 }
 
 .empty-state {
   text-align: center;
-  padding: 40px;
-  color: #aaa;
+  padding: 32px;
+  color: #a0aec0;
 }
 
 @media (max-width: 768px) {

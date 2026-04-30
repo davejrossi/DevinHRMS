@@ -8,15 +8,15 @@
 
 .orgchart-controls {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .zoom-display {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #555;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4a5568;
   min-width: 36px;
   text-align: center;
 }
@@ -24,21 +24,21 @@
 .box-style-selector {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-right: 8px;
+  gap: 4px;
+  margin-right: 6px;
 }
 
 .box-style-selector label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #555;
+  color: #4a5568;
 }
 
 .box-style-selector select {
-  padding: 5px 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 0.82rem;
+  padding: 4px 8px;
+  border: 1px solid #cbd5e0;
+  border-radius: 3px;
+  font-size: 0.75rem;
   background: #fff;
   cursor: pointer;
 }
@@ -48,21 +48,21 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   flex-shrink: 0;
-  font-size: 0.82rem;
-  padding: 8px 16px;
+  font-size: 0.75rem;
+  padding: 6px 12px;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  border: 1px solid #e2e8f0;
 }
 
 .breadcrumb-item {
-  color: #888;
+  color: #718096;
 }
 
 .breadcrumb-item.clickable {
-  color: #1565c0;
+  color: #2b6cb0;
   cursor: pointer;
   font-weight: 600;
 }
@@ -72,12 +72,12 @@
 }
 
 .breadcrumb-item.current {
-  color: #333;
-  font-weight: 700;
+  color: #2d3748;
+  font-weight: 600;
 }
 
 .breadcrumb-sep {
-  color: #ccc;
+  color: #cbd5e0;
   margin: 0 2px;
 }
 
@@ -87,9 +87,9 @@
   min-height: 0;
   overflow: hidden;
   background: #fff;
-  border-radius: 12px;
-  padding: 32px 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  padding: 24px 20px;
+  border: 1px solid #e2e8f0;
   cursor: grab;
   user-select: none;
 }
@@ -98,7 +98,7 @@
   cursor: grabbing;
 }
 
-/* Tree layout — top-down */
+/* Tree layout */
 .org-box-tree {
   display: flex;
   flex-direction: column;
@@ -114,140 +114,140 @@
 
 /* Boxes */
 .org-box {
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 12px 20px;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  padding: 10px 16px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.12s;
   position: relative;
   background: #fff;
-  min-width: 140px;
-  max-width: 220px;
+  min-width: 130px;
+  max-width: 200px;
 }
 
 .org-box:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transform: translateY(-1px);
+  border-color: #a0aec0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* Department boxes */
 .dept-box {
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-  border-color: #90caf9;
+  background: #ebf8ff;
+  border-color: #90cdf4;
 }
 
 .dept-box.expanded {
-  border-color: #1565c0;
+  border-color: #3182ce;
 }
 
 .org-box-dept-name {
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: #1565c0;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: #2b6cb0;
 }
 
 .org-box-dept-meta {
-  font-size: 0.72rem;
-  color: #5e92c0;
+  font-size: 0.6875rem;
+  color: #4a90c4;
   margin-top: 2px;
 }
 
 .org-box-toggle {
-  font-size: 0.7rem;
-  color: #1565c0;
-  margin-top: 4px;
+  font-size: 0.625rem;
+  color: #2b6cb0;
+  margin-top: 3px;
 }
 
 /* Employee boxes */
 .emp-box {
   background: #fff;
-  border-color: #e0e0e0;
+  border-color: #e2e8f0;
 }
 
 .org-box-avatar {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: #f3e5f5;
-  color: #7b1fa2;
+  background: #faf5ff;
+  color: #6b46c1;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 700;
-  margin: 0 auto 6px;
+  margin: 0 auto 4px;
 }
 
 .org-box-emp-name {
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: #333;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: #2d3748;
 }
 
 .org-box-emp-title {
-  font-size: 0.75rem;
-  color: #888;
-  margin-top: 2px;
+  font-size: 0.6875rem;
+  color: #718096;
+  margin-top: 1px;
 }
 
 .org-box-emp-dept {
-  font-size: 0.7rem;
-  color: #aaa;
+  font-size: 0.625rem;
+  color: #a0aec0;
   margin-top: 1px;
 }
 
 .org-box-emp-email {
-  font-size: 0.68rem;
-  color: #999;
-  margin-top: 4px;
+  font-size: 0.625rem;
+  color: #a0aec0;
+  margin-top: 3px;
   word-break: break-all;
 }
 
 .org-box-emp-hire {
-  font-size: 0.68rem;
-  color: #aaa;
-  margin-top: 2px;
+  font-size: 0.625rem;
+  color: #a0aec0;
+  margin-top: 1px;
 }
 
 .org-box-emp-status {
-  font-size: 0.65rem;
+  font-size: 0.5625rem;
   font-weight: 600;
-  margin-top: 4px;
-  padding: 1px 8px;
-  border-radius: 8px;
+  margin-top: 3px;
+  padding: 1px 6px;
+  border-radius: 3px;
   display: inline-block;
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
 
-.status-active { background: #e8f5e9; color: #2e7d32; }
-.status-inactive { background: #ffebee; color: #c62828; }
-.status-onleave { background: #fff3e0; color: #e65100; }
+.status-active { background: #f0fff4; color: #276749; }
+.status-inactive { background: #fff5f5; color: #c53030; }
+.status-onleave { background: #fffaf0; color: #c05621; }
 
 /* Box style sizes */
 .box-compact {
-  min-width: 100px;
-  max-width: 140px;
-  padding: 8px 12px;
+  min-width: 90px;
+  max-width: 130px;
+  padding: 6px 10px;
 }
 
 .box-compact .org-box-avatar {
-  width: 28px;
-  height: 28px;
-  font-size: 0.65rem;
-  margin-bottom: 4px;
+  width: 24px;
+  height: 24px;
+  font-size: 0.5625rem;
+  margin-bottom: 3px;
 }
 
 .box-standard {
-  min-width: 140px;
-  max-width: 200px;
+  min-width: 130px;
+  max-width: 180px;
 }
 
 .box-detailed {
-  min-width: 180px;
-  max-width: 260px;
-  padding: 14px 18px;
+  min-width: 160px;
+  max-width: 240px;
+  padding: 12px 14px;
 }
 
 /* Connector lines */
@@ -259,64 +259,59 @@
 }
 
 .org-box-connector-down {
-  width: 2px;
-  height: 20px;
-  background: #ccc;
+  width: 1px;
+  height: 18px;
+  background: #cbd5e0;
 }
 
 .org-box-children {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: flex-start;
   position: relative;
-  padding-top: 20px;
+  padding-top: 18px;
 }
 
-/* Horizontal connector line across children */
 .org-box-children::before {
   content: '';
   position: absolute;
   top: 0;
   left: 50%;
   right: 50%;
-  height: 2px;
-  background: #ccc;
+  height: 1px;
+  background: #cbd5e0;
 }
 
-/* When there are multiple children, extend the line */
 .org-box-children:has(> .org-box-branch:nth-child(2))::before {
   left: calc(50% - 50%);
   right: calc(50% - 50%);
 }
 
-/* Individual branch vertical connector up to horizontal line */
 .org-box-children > .org-box-branch::before {
   content: '';
   position: absolute;
-  top: -20px;
+  top: -18px;
   left: 50%;
-  width: 2px;
-  height: 20px;
-  background: #ccc;
+  width: 1px;
+  height: 18px;
+  background: #cbd5e0;
   transform: translateX(-50%);
 }
 
-/* Horizontal line spans from first to last child center */
+/* Horizontal line spans */
 .org-box-children {
   position: relative;
 }
 
-/* Override the before for proper spanning */
 .org-box-children::after {
   content: '';
   position: absolute;
   top: 0;
-  height: 2px;
-  background: #ccc;
+  height: 1px;
+  background: #cbd5e0;
   pointer-events: none;
 }
 
-/* Use JS-free approach: first child to last child horizontal line */
 .org-box-children > .org-box-branch:first-child ~ .org-box-branch:last-child ~ .placeholder {
   display: none;
 }
@@ -326,35 +321,34 @@
   position: fixed;
   z-index: 1000;
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   padding: 4px 0;
-  min-width: 180px;
+  min-width: 160px;
 }
 
 .org-context-menu button {
   display: block;
   width: 100%;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border: none;
   background: none;
   text-align: left;
   cursor: pointer;
-  font-size: 0.85rem;
-  color: #333;
+  font-size: 0.8125rem;
+  color: #2d3748;
   transition: background 0.1s;
 }
 
 .org-context-menu button:hover {
-  background: #f0f4ff;
-  color: #1565c0;
+  background: #f7fafc;
+  color: #2b6cb0;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .orgchart-container {
-    padding: 16px 12px;
+    padding: 12px 10px;
   }
 
   .org-box-children {
@@ -369,15 +363,15 @@
   }
 
   .org-box-children > .org-box-branch::before {
-    top: -12px;
-    height: 12px;
+    top: -10px;
+    height: 10px;
   }
 
   .org-box-children {
-    padding-top: 12px;
+    padding-top: 10px;
   }
 
   .org-box-connector-down {
-    height: 12px;
+    height: 10px;
   }
 }
