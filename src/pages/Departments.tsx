@@ -117,7 +117,15 @@ export default function Departments() {
               >
                 <option value="">None (Top Level)</option>
                 {state.departments
-                  .filter((d) => d.id !== editId)
+                  .filter((d) => {
+                    if (!editId) return true;
+                    if (d.id === editId) return false;
+                    const getDescs = (parentId: string): string[] => {
+                      const children = state.departments.filter((c) => c.parentId === parentId);
+                      return children.flatMap((c) => [c.id, ...getDescs(c.id)]);
+                    };
+                    return !getDescs(editId).includes(d.id);
+                  })
                   .map((d) => (
                     <option key={d.id} value={d.id}>{d.name}</option>
                   ))}

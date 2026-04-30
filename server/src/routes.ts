@@ -19,24 +19,37 @@ router.post('/departments', (req, res) => {
   res.status(201).json({ id, name, parentId: parentId ?? null, description: description ?? '' });
 });
 
+function getDescendantIds(deptId: string, visited = new Set<string>()): string[] {
+  if (visited.has(deptId)) return [];
+  visited.add(deptId);
+  const children = db.prepare('SELECT id FROM departments WHERE parent_id = ?').all(deptId) as { id: string }[];
+  let ids: string[] = [];
+  for (const c of children) {
+    ids.push(c.id);
+    ids = ids.concat(getDescendantIds(c.id, visited));
+  }
+  return ids;
+}
+
 router.put('/departments/:id', (req, res) => {
   const { name, parentId, description } = req.body;
+  if (parentId) {
+    if (parentId === req.params.id) {
+      res.status(400).json({ error: 'Department cannot be its own parent' });
+      return;
+    }
+    const descendants = getDescendantIds(req.params.id);
+    if (descendants.includes(parentId)) {
+      res.status(400).json({ error: 'Cannot set a descendant as parent (circular reference)' });
+      return;
+    }
+  }
   db.prepare('UPDATE departments SET name = ?, parent_id = ?, description = ? WHERE id = ?').run(name, parentId ?? null, description ?? '', req.params.id);
   res.json({ id: req.params.id, name, parentId: parentId ?? null, description: description ?? '' });
 });
 
 router.delete('/departments/:id', (req, res) => {
-  const getAllChildren = (parentId: string): string[] => {
-    const children = db.prepare('SELECT id FROM departments WHERE parent_id = ?').all(parentId) as { id: string }[];
-    let ids: string[] = [];
-    for (const c of children) {
-      ids.push(c.id);
-      ids = ids.concat(getAllChildren(c.id));
-    }
-    return ids;
-  };
-
-  const deptIds = [req.params.id, ...getAllChildren(req.params.id)];
+  const deptIds = [req.params.id, ...getDescendantIds(req.params.id)];
   const placeholders = deptIds.map(() => '?').join(',');
 
   const tx = db.transaction(() => {
