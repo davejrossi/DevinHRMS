@@ -11,7 +11,12 @@ const STORAGE_KEY = 'hrms-data';
 function getInitialState(): HRMSState {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) {
-    return JSON.parse(stored);
+    const parsed = JSON.parse(stored) as HRMSState;
+    return {
+      departments: parsed.departments,
+      positions: parsed.positions.map((p) => ({ ...p, requiredSkills: p.requiredSkills ?? [] })),
+      employees: parsed.employees.map((e) => ({ ...e, skills: e.skills ?? [] })),
+    };
   }
   return {
     departments: seedDepartments,

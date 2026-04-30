@@ -38,7 +38,7 @@ export default function EmployeeForm() {
         const { id: _id, avatar: _avatar, ...rest } = emp;
         void _id;
         void _avatar;
-        return rest;
+        return { ...rest, skills: rest.skills ?? [] };
       }
     }
     return emptyForm;

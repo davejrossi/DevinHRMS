@@ -13,7 +13,8 @@ interface PositionMatch {
 }
 
 function computeMatches(employee: Employee, positions: Position[]): PositionMatch[] {
-  const empSkillMap = new Map(employee.skills.map((s) => [s.name.toLowerCase(), s]));
+  const empSkills = employee.skills ?? [];
+  const empSkillMap = new Map(empSkills.map((s) => [s.name.toLowerCase(), s]));
 
   return positions.map((pos) => {
     const matchedSkills: PositionMatch['matchedSkills'] = [];
@@ -40,7 +41,7 @@ function computeMatches(employee: Employee, positions: Position[]): PositionMatc
     }
 
     const reqNames = new Set(reqSkills.map((r) => r.name.toLowerCase()));
-    const extraSkills = employee.skills
+    const extraSkills = empSkills
       .filter((s) => !reqNames.has(s.name.toLowerCase()))
       .map((s) => s.name);
 
@@ -163,7 +164,7 @@ export default function CareerPlanning() {
             </div>
           </div>
           <div className="cp-emp-skills">
-            {selectedEmployee.skills.map((s, i) => (
+            {(selectedEmployee.skills ?? []).map((s, i) => (
               <span key={i} className="cp-skill-chip">
                 {s.name} <strong>{s.proficiency}</strong>
               </span>
