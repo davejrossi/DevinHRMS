@@ -50,20 +50,24 @@ export default function Positions() {
 
   const handleSave = async () => {
     if (!form.title.trim() || !form.departmentId) return;
-    if (editId) {
-      await dispatch({ type: 'UPDATE_POSITION', payload: { ...form, id: editId } });
-    } else {
-      await dispatch({ type: 'ADD_POSITION', payload: form });
-    }
-    setEditId(null);
-    setShowAdd(false);
+    try {
+      if (editId) {
+        await dispatch({ type: 'UPDATE_POSITION', payload: { ...form, id: editId } });
+      } else {
+        await dispatch({ type: 'ADD_POSITION', payload: form });
+      }
+      setEditId(null);
+      setShowAdd(false);
+    } catch { /* error logged by dispatch */ }
   };
 
   const handleDelete = async () => {
     if (deleteId) {
-      await dispatch({ type: 'DELETE_POSITION', payload: deleteId });
-      setDeleteId(null);
-      if (editId === deleteId) setEditId(null);
+      try {
+        await dispatch({ type: 'DELETE_POSITION', payload: deleteId });
+        setDeleteId(null);
+        if (editId === deleteId) setEditId(null);
+      } catch { setDeleteId(null); }
     }
   };
 

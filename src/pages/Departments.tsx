@@ -30,22 +30,26 @@ export default function Departments() {
   const handleSave = async () => {
     if (!form.name.trim()) return;
     const payload = { name: form.name, parentId: form.parentId || null, description: form.description };
-    if (editId) {
-      await dispatch({ type: 'UPDATE_DEPARTMENT', payload: { ...payload, id: editId } });
-    } else {
-      await dispatch({ type: 'ADD_DEPARTMENT', payload });
-    }
-    setEditId(null);
-    setShowAdd(false);
+    try {
+      if (editId) {
+        await dispatch({ type: 'UPDATE_DEPARTMENT', payload: { ...payload, id: editId } });
+      } else {
+        await dispatch({ type: 'ADD_DEPARTMENT', payload });
+      }
+      setEditId(null);
+      setShowAdd(false);
+    } catch { /* error logged by dispatch */ }
   };
 
   const handleDelete = async () => {
     if (deleteId) {
-      await dispatch({ type: 'DELETE_DEPARTMENT', payload: deleteId });
-      setDeleteId(null);
-      if (editId === deleteId) {
-        setEditId(null);
-      }
+      try {
+        await dispatch({ type: 'DELETE_DEPARTMENT', payload: deleteId });
+        setDeleteId(null);
+        if (editId === deleteId) {
+          setEditId(null);
+        }
+      } catch { setDeleteId(null); }
     }
   };
 

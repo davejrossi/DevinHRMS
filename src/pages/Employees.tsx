@@ -27,8 +27,10 @@ export default function Employees() {
 
   const handleDelete = async () => {
     if (deleteId) {
-      await dispatch({ type: 'DELETE_EMPLOYEE', payload: deleteId });
-      setDeleteId(null);
+      try {
+        await dispatch({ type: 'DELETE_EMPLOYEE', payload: deleteId });
+        setDeleteId(null);
+      } catch { setDeleteId(null); }
     }
   };
 
