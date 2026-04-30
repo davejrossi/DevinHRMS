@@ -48,7 +48,7 @@
 }
 
 .pos-card.editing {
-  border-color: #3182ce;
+  border-color: #3b82f6;
 }
 
 .pos-card-header {
@@ -73,14 +73,14 @@
   letter-spacing: 0.3px;
 }
 
-.level-entry { background: #f0fff4; color: #276749; }
-.level-mid { background: #ebf8ff; color: #2b6cb0; }
-.level-senior { background: #fffaf0; color: #c05621; }
-.level-lead { background: #faf5ff; color: #6b46c1; }
-.level-manager { background: #fff5f5; color: #c53030; }
-.level-director { background: #e6fffa; color: #285e61; }
-.level-vp { background: #faf5ff; color: #553c9a; }
-.level-c-level { background: #fffff0; color: #975a16; }
+.level-entry { background: #eff6ff; color: #3b82f6; }
+.level-mid { background: #dbeafe; color: #2563eb; }
+.level-senior { background: #dbeafe; color: #1d4ed8; }
+.level-lead { background: #bfdbfe; color: #1e40af; }
+.level-manager { background: #bfdbfe; color: #1e3a8a; }
+.level-director { background: #93c5fd; color: #1e3a8a; }
+.level-vp { background: #60a5fa; color: #fff; }
+.level-c-level { background: #2563eb; color: #fff; }
 
 .pos-card-dept {
   font-size: 0.75rem;
@@ -148,8 +148,8 @@
 
 .pos-form-panel textarea:focus {
   outline: none;
-  border-color: #3182ce;
-  box-shadow: 0 0 0 1px #3182ce;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
 }
 
 /* Position skills */
@@ -179,13 +179,13 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: #ebf4ff;
-  border: 1px solid #bee3f8;
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
   border-radius: 3px;
   padding: 2px 6px 2px 8px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #2d3748;
+  color: #1e293b;
 }
 
 .pos-skill-tag select {
@@ -208,7 +208,7 @@
 }
 
 .pos-skill-remove:hover {
-  color: #c53030;
+  color: #dc2626;
 }
 
 @media (max-width: 900px) {

@@ -25,13 +25,13 @@
 
 .form-error {
   font-size: 0.75rem;
-  color: #c53030;
+  color: #dc2626;
   margin-top: 2px;
 }
 
 .form-group input.error,
 .form-group select.error {
-  border-color: #c53030;
+  border-color: #dc2626;
 }
 
 .form-group.full-width {
@@ -79,8 +79,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: #ebf4ff;
-  border: 1px solid #bee3f8;
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
   border-radius: 3px;
   padding: 3px 6px 3px 10px;
   font-size: 0.75rem;
@@ -111,7 +111,7 @@
 }
 
 .skill-remove:hover {
-  color: #c53030;
+  color: #dc2626;
 }
 
 @media (max-width: 600px) {

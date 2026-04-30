@@ -52,7 +52,7 @@ function computeMatches(employee: Employee, positions: Position[]): PositionMatc
 }
 
 function FitBar({ score }: { score: number }) {
-  const color = score >= 80 ? '#2e7d32' : score >= 60 ? '#f57f17' : score >= 40 ? '#e65100' : '#c62828';
+  const color = score >= 80 ? '#1d4ed8' : score >= 60 ? '#2563eb' : score >= 40 ? '#3b82f6' : '#93c5fd';
   return (
     <div className="fit-bar-container">
       <div className="fit-bar" style={{ width: `${score}%`, background: color }} />

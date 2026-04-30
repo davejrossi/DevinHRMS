@@ -62,7 +62,7 @@
 }
 
 .breadcrumb-item.clickable {
-  color: #2b6cb0;
+  color: #1d4ed8;
   cursor: pointer;
   font-weight: 600;
 }
@@ -133,29 +133,29 @@
 
 /* Department boxes */
 .dept-box {
-  background: #ebf8ff;
-  border-color: #90cdf4;
+  background: #eff6ff;
+  border-color: #93c5fd;
 }
 
 .dept-box.expanded {
-  border-color: #3182ce;
+  border-color: #2563eb;
 }
 
 .org-box-dept-name {
   font-weight: 600;
   font-size: 0.8125rem;
-  color: #2b6cb0;
+  color: #1d4ed8;
 }
 
 .org-box-dept-meta {
   font-size: 0.6875rem;
-  color: #4a90c4;
+  color: #60a5fa;
   margin-top: 2px;
 }
 
 .org-box-toggle {
   font-size: 0.625rem;
-  color: #2b6cb0;
+  color: #1d4ed8;
   margin-top: 3px;
 }
 
@@ -169,8 +169,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #faf5ff;
-  color: #6b46c1;
+  background: #dbeafe;
+  color: #1d4ed8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -221,9 +221,9 @@
   letter-spacing: 0.3px;
 }
 
-.status-active { background: #f0fff4; color: #276749; }
-.status-inactive { background: #fff5f5; color: #c53030; }
-.status-onleave { background: #fffaf0; color: #c05621; }
+.status-active { background: #f0fdf4; color: #16a34a; }
+.status-inactive { background: #fef2f2; color: #dc2626; }
+.status-onleave { background: #fefce8; color: #ca8a04; }
 
 /* Box style sizes */
 .box-compact {
@@ -343,7 +343,7 @@
 
 .org-context-menu button:hover {
   background: #f7fafc;
-  color: #2b6cb0;
+  color: #1d4ed8;
 }
 
 @media (max-width: 768px) {

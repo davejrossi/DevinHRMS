@@ -69,8 +69,8 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #ebf4ff;
-  color: #2b6cb0;
+  background: #dbeafe;
+  color: #1d4ed8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,16 +96,16 @@
 }
 
 .cp-skill-chip {
-  background: #ebf4ff;
-  border: 1px solid #bee3f8;
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
   border-radius: 3px;
   padding: 2px 8px;
   font-size: 0.6875rem;
-  color: #4a5568;
+  color: #475569;
 }
 
 .cp-skill-chip strong {
-  color: #2b6cb0;
+  color: #1d4ed8;
   margin-left: 2px;
 }
 
@@ -173,7 +173,7 @@
   text-align: center;
   font-weight: 600;
   font-size: 0.8125rem;
-  color: #c05621;
+  color: #64748b;
 }
 
 /* Fit bar */
@@ -210,14 +210,14 @@
   color: #4a5568;
 }
 
-.level-entry { background: #f0fff4; color: #276749; }
-.level-mid { background: #ebf8ff; color: #2b6cb0; }
-.level-senior { background: #faf5ff; color: #6b46c1; }
-.level-lead { background: #fffaf0; color: #c05621; }
-.level-manager { background: #fff5f5; color: #c53030; }
-.level-director { background: #faf5ff; color: #553c9a; }
-.level-vp { background: #e6fffa; color: #285e61; }
-.level-c-level { background: #fffff0; color: #975a16; }
+.level-entry { background: #eff6ff; color: #3b82f6; }
+.level-mid { background: #dbeafe; color: #2563eb; }
+.level-senior { background: #dbeafe; color: #1d4ed8; }
+.level-lead { background: #bfdbfe; color: #1e40af; }
+.level-manager { background: #bfdbfe; color: #1e3a8a; }
+.level-director { background: #93c5fd; color: #1e3a8a; }
+.level-vp { background: #60a5fa; color: #fff; }
+.level-c-level { background: #2563eb; color: #fff; }
 
 /* Expanded detail */
 .cp-match-detail {
@@ -250,8 +250,8 @@
   font-size: 0.75rem;
 }
 
-.skill-comparison-row.met .scr-name { color: #276749; }
-.skill-comparison-row.gap .scr-name { color: #c05621; }
+.skill-comparison-row.met .scr-name { color: #1d4ed8; }
+.skill-comparison-row.gap .scr-name { color: #64748b; }
 
 .scr-name {
   flex: 1;
@@ -273,13 +273,13 @@
 }
 
 .scr-dot.emp-filled {
-  background: #2b6cb0;
-  border-color: #2b6cb0;
+  background: #2563eb;
+  border-color: #2563eb;
 }
 
 .scr-dot.req-mark:not(.emp-filled) {
-  background: #fed7d7;
-  border-color: #c05621;
+  background: #e2e8f0;
+  border-color: #94a3b8;
 }
 
 .scr-label {
@@ -303,7 +303,7 @@
 }
 
 .dev-gap {
-  color: #c05621;
+  color: #64748b;
   font-weight: 600;
 }
 
@@ -314,8 +314,8 @@
 }
 
 .extra-skill-chip {
-  background: #f0fff4;
-  color: #276749;
+  background: #dbeafe;
+  color: #1d4ed8;
   padding: 2px 8px;
   border-radius: 3px;
   font-size: 0.6875rem;

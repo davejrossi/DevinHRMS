@@ -9,16 +9,16 @@
 }
 
 .status-active {
-  background: #f0fff4;
-  color: #276749;
+  background: #f0fdf4;
+  color: #16a34a;
 }
 
 .status-inactive {
-  background: #fff5f5;
-  color: #c53030;
+  background: #fef2f2;
+  color: #dc2626;
 }
 
 .status-onleave {
-  background: #fffaf0;
-  color: #c05621;
+  background: #fefce8;
+  color: #ca8a04;
 }

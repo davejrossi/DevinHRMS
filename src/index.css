@@ -10,8 +10,8 @@ html, body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.45;
-  color: #2d3748;
-  background: #edf0f4;
+  color: #1e293b;
+  background: #f1f5f9;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -34,37 +34,37 @@ button {
   align-items: center;
   justify-content: center;
   padding: 6px 14px;
-  border: 1px solid #cbd5e0;
+  border: 1px solid #cbd5e1;
   border-radius: 3px;
   font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.12s;
   background: #fff;
-  color: #2d3748;
+  color: #1e293b;
   white-space: nowrap;
 }
 
 .btn:hover {
-  background: #f7fafc;
-  border-color: #a0aec0;
+  background: #f8fafc;
+  border-color: #94a3b8;
 }
 
 .btn-primary {
-  background: #2b6cb0;
+  background: #1d4ed8;
   color: #fff;
-  border-color: #2b6cb0;
+  border-color: #1d4ed8;
 }
 
 .btn-primary:hover {
-  background: #2c5282;
-  border-color: #2c5282;
+  background: #1e40af;
+  border-color: #1e40af;
 }
 
 .btn-secondary {
-  background: #edf2f7;
-  border-color: #cbd5e0;
-  color: #4a5568;
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #475569;
 }
 
 .btn-secondary:hover {
@@ -73,13 +73,13 @@ button {
 
 .btn-danger {
   background: #fff;
-  color: #c53030;
-  border-color: #feb2b2;
+  color: #dc2626;
+  border-color: #fca5a5;
 }
 
 .btn-danger:hover {
-  background: #fff5f5;
-  border-color: #c53030;
+  background: #fef2f2;
+  border-color: #dc2626;
 }
 
 .btn-sm {
@@ -96,7 +96,7 @@ button {
 .form-group label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #4a5568;
+  color: #475569;
   text-transform: uppercase;
   letter-spacing: 0.4px;
 }
@@ -104,7 +104,7 @@ button {
 .form-group input,
 .form-group select {
   padding: 7px 10px;
-  border: 1px solid #cbd5e0;
+  border: 1px solid #cbd5e1;
   border-radius: 3px;
   font-size: 0.8125rem;
   transition: border-color 0.12s;
@@ -115,15 +115,15 @@ button {
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #3182ce;
-  box-shadow: 0 0 0 1px #3182ce;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
 }
 
 .page-title {
   margin: 0 0 16px;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #1a202c;
+  color: #0f172a;
 }
 
 .page-header {
@@ -153,10 +153,10 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e0;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a0aec0;
+  background: #94a3b8;
 }

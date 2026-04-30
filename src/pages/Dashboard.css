@@ -51,9 +51,9 @@
   font-weight: 600;
 }
 
-.stat-active .stat-value { color: #276749; }
-.stat-leave .stat-value { color: #c05621; }
-.stat-inactive .stat-value { color: #c53030; }
+.stat-active .stat-value { color: #16a34a; }
+.stat-leave .stat-value { color: #ca8a04; }
+.stat-inactive .stat-value { color: #dc2626; }
 
 .dashboard-panels {
   display: grid;
@@ -110,8 +110,8 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #ebf4ff;
-  color: #2b6cb0;
+  background: #dbeafe;
+  color: #1d4ed8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,7 +177,7 @@
 
 .dept-stat-bar {
   height: 100%;
-  background: #3182ce;
+  background: #2563eb;
   border-radius: 3px;
   transition: width 0.3s;
 }

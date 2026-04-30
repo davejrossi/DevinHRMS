@@ -54,8 +54,8 @@
 }
 
 .dept-node-card.editing {
-  border-color: #3182ce;
-  background: #ebf8ff;
+  border-color: #3b82f6;
+  background: #eff6ff;
 }
 
 .dept-node-info {
@@ -114,8 +114,8 @@
 
 .dept-form-panel textarea:focus {
   outline: none;
-  border-color: #3182ce;
-  box-shadow: 0 0 0 1px #3182ce;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
 }
 
 @media (max-width: 900px) {
