@@ -154,6 +154,45 @@
   color: #888;
 }
 
+/* Skills display */
+.skills-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #f0f4ff;
+  border: 1px solid #d0daf0;
+  border-radius: 20px;
+  font-size: 0.82rem;
+}
+
+.skill-badge-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.skill-badge-level {
+  display: flex;
+  gap: 2px;
+}
+
+.skill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+.skill-dot.filled {
+  background: #1565c0;
+}
+
 @media (max-width: 768px) {
   .detail-grid {
     grid-template-columns: 1fr;

@@ -124,6 +124,38 @@ export default function OrgChart() {
   const [rootDeptId, setRootDeptId] = useState<string | null>(null);
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
   const contextRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState(false);
+  const panStart = useRef({ x: 0, y: 0, panX: 0, panY: 0 });
+
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.08 : 0.08;
+    setZoom((prev) => Math.min(3, Math.max(0.2, prev + delta)));
+  }, []);
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (e.button !== 0) return;
+    setIsPanning(true);
+    panStart.current = { x: e.clientX, y: e.clientY, panX: pan.x, panY: pan.y };
+  }, [pan]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isPanning) return;
+    setPan({
+      x: panStart.current.panX + (e.clientX - panStart.current.x),
+      y: panStart.current.panY + (e.clientY - panStart.current.y),
+    });
+  }, [isPanning]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsPanning(false);
+  }, []);
+
+  const resetZoom = () => { setZoom(1); setPan({ x: 0, y: 0 }); };
 
   const [expandedDepts, setExpandedDepts] = useState<Set<string>>(() => {
     return new Set(state.departments.map((d) => d.id));
@@ -183,6 +215,10 @@ export default function OrgChart() {
               <option value="detailed">Detailed</option>
             </select>
           </div>
+          <span className="zoom-display">{Math.round(zoom * 100)}%</span>
+          <button className="btn btn-sm" onClick={() => setZoom((z) => Math.min(3, z + 0.2))}>+</button>
+          <button className="btn btn-sm" onClick={() => setZoom((z) => Math.max(0.2, z - 0.2))}>-</button>
+          <button className="btn btn-sm" onClick={resetZoom}>Reset</button>
           <button className="btn btn-sm" onClick={expandAll}>Expand All</button>
           <button className="btn btn-sm" onClick={collapseAll}>Collapse All</button>
           {rootDeptId && (
@@ -207,11 +243,25 @@ export default function OrgChart() {
         </div>
       )}
 
-      <div className="orgchart-container">
+      <div
+        ref={containerRef}
+        className={`orgchart-container ${isPanning ? 'panning' : ''}`}
+        onWheel={handleWheel}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+      >
         {visibleRoots.length === 0 ? (
           <div className="empty-state">No departments defined. Create departments to see the org chart.</div>
         ) : (
-          <div className="org-box-tree">
+          <div
+            className="org-box-tree"
+            style={{
+              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+              transformOrigin: 'top center',
+            }}
+          >
             {visibleRoots.map((dept) => (
               <OrgBoxNode
                 key={dept.id}

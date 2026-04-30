@@ -150,6 +150,65 @@
   box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.15);
 }
 
+/* Position skills */
+.pos-skills-add {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.pos-skills-add input {
+  flex: 1;
+  min-width: 0;
+}
+
+.pos-skills-add select {
+  width: 50px;
+}
+
+.pos-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.pos-skill-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f0f4ff;
+  border: 1px solid #d0daf0;
+  border-radius: 14px;
+  padding: 3px 6px 3px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.pos-skill-tag select {
+  width: 38px;
+  padding: 1px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  background: #fff;
+}
+
+.pos-skill-remove {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.pos-skill-remove:hover {
+  color: #e53935;
+}
+
 @media (max-width: 900px) {
   .pos-layout {
     grid-template-columns: 1fr;

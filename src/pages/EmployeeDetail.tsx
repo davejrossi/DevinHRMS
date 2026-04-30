@@ -83,6 +83,24 @@ export default function EmployeeDetail() {
           </div>
         </div>
 
+        {employee.skills && employee.skills.length > 0 && (
+          <div className="detail-card full-width">
+            <h3>Skills &amp; Competencies</h3>
+            <div className="skills-display">
+              {employee.skills.map((skill, i) => (
+                <div key={i} className="skill-badge">
+                  <span className="skill-badge-name">{skill.name}</span>
+                  <span className="skill-badge-level">
+                    {Array.from({ length: 5 }, (_, j) => (
+                      <span key={j} className={`skill-dot ${j < skill.proficiency ? 'filled' : ''}`} />
+                    ))}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {directReports.length > 0 && (
           <div className="detail-card full-width">
             <h3>Direct Reports ({directReports.length})</h3>

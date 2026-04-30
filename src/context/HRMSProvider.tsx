@@ -35,7 +35,7 @@ function reducer(state: HRMSState, action: HRMSAction): HRMSState {
     case 'ADD_EMPLOYEE':
       return {
         ...state,
-        employees: [...state.employees, { ...action.payload, id: uuidv4(), avatar: '' }],
+        employees: [...state.employees, { ...action.payload, id: uuidv4(), avatar: '', skills: action.payload.skills ?? [] }],
       };
     case 'UPDATE_EMPLOYEE':
       return {
