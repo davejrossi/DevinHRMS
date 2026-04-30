@@ -107,7 +107,7 @@ export default function EmployeeForm() {
               onChange={(e) => handleChange('firstName', e.target.value)}
               className={errors.firstName ? 'error' : ''}
             />
-            {errors.firstName && <span className="field-error">{errors.firstName}</span>}
+            {errors.firstName && <span className="form-error">{errors.firstName}</span>}
           </div>
           <div className="form-group">
             <label>Last Name *</label>
@@ -117,7 +117,7 @@ export default function EmployeeForm() {
               onChange={(e) => handleChange('lastName', e.target.value)}
               className={errors.lastName ? 'error' : ''}
             />
-            {errors.lastName && <span className="field-error">{errors.lastName}</span>}
+            {errors.lastName && <span className="form-error">{errors.lastName}</span>}
           </div>
           <div className="form-group">
             <label>Email *</label>
@@ -127,7 +127,7 @@ export default function EmployeeForm() {
               onChange={(e) => handleChange('email', e.target.value)}
               className={errors.email ? 'error' : ''}
             />
-            {errors.email && <span className="field-error">{errors.email}</span>}
+            {errors.email && <span className="form-error">{errors.email}</span>}
           </div>
           <div className="form-group">
             <label>Phone</label>
@@ -145,7 +145,7 @@ export default function EmployeeForm() {
               onChange={(e) => handleChange('hireDate', e.target.value)}
               className={errors.hireDate ? 'error' : ''}
             />
-            {errors.hireDate && <span className="field-error">{errors.hireDate}</span>}
+            {errors.hireDate && <span className="form-error">{errors.hireDate}</span>}
           </div>
           <div className="form-group">
             <label>Status</label>
@@ -167,7 +167,7 @@ export default function EmployeeForm() {
                 <option key={d.id} value={d.id}>{d.name}</option>
               ))}
             </select>
-            {errors.departmentId && <span className="field-error">{errors.departmentId}</span>}
+            {errors.departmentId && <span className="form-error">{errors.departmentId}</span>}
           </div>
           <div className="form-group">
             <label>Position</label>
