@@ -12,10 +12,24 @@ function getInitialState(): HRMSState {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) {
     const parsed = JSON.parse(stored) as HRMSState;
+    const seedPosMap = new Map(seedPositions.map((p) => [p.id, p]));
+    const seedEmpMap = new Map(seedEmployees.map((e) => [e.id, e]));
     return {
       departments: parsed.departments,
-      positions: parsed.positions.map((p) => ({ ...p, requiredSkills: p.requiredSkills ?? [] })),
-      employees: parsed.employees.map((e) => ({ ...e, skills: e.skills ?? [] })),
+      positions: parsed.positions.map((p) => {
+        if (!p.requiredSkills || p.requiredSkills.length === 0) {
+          const seed = seedPosMap.get(p.id);
+          return { ...p, requiredSkills: seed?.requiredSkills ?? [] };
+        }
+        return p;
+      }),
+      employees: parsed.employees.map((e) => {
+        if (!e.skills || e.skills.length === 0) {
+          const seed = seedEmpMap.get(e.id);
+          return { ...e, skills: seed?.skills ?? [] };
+        }
+        return e;
+      }),
     };
   }
   return {
